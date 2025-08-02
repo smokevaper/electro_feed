@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ оформлен - Electro Feed</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Заказ успешно оформлен!</h1>
+            <p>Номер вашего заказа: <strong>#{{ order.id }}</strong></p>
+            <p>Общая сумма: <strong>{{ order.total_price }}₸</strong></p>
+            
+            <div class="success-info">
+                <h3>Что дальше?</h3>
+                <ul>
+                    <li>Мы получили ваш заказ и уже обрабатываем его</li>
+                    <li>Напишите нашему менеджеру в Telegram @e_f_operator</li>
+                    <li>Скиньте скриншот этой страницы заказа и напишите какой товар вы заказали</li>
+                    <li>Доставка займет от 10 до 30 дней через СДЭК</li>
+                </ul>
+            </div>
+            
+            <div class="success-actions">
+                <a href="/" class="continue-shopping-btn">Продолжить покупки</a>
+                <a href="/my_orders" class="view-orders-btn">Мои заказы</a>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Контакты для связи:</h3>
+                <p>📱 WhatsApp: +77021685940</p>
+                <p>💬 Telegram: @e_f_operator</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
