@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Electro Feed</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1>Корзина покупок</h1>
+            <a href="/" class="back-link">← Вернуться к покупкам</a>
+        </div>
+        
+        {% if cart_items %}
+            <div class="cart-items">
+                {% for item in cart_items %}
+                <div class="cart-item">
+                    <div class="item-info">
+                        <h3>{{ item.product.name }}</h3>
+                        <p class="item-price">{{ item.product.price_tenge }}₸ за штуку</p>
+                        <p class="item-quantity">Количество: {{ item.quantity }}</p>
+                        <p class="item-total">Итого: {{ item.product.price_tenge * item.quantity }}₸</p>
+                    </div>
+                    <a href="/remove_from_cart/{{ item.id }}" class="remove-btn" onclick="return confirm('Удалить товар из корзины?')">
+                        <i class="fas fa-trash"></i>
+                        Удалить
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="cart-summary">
+                <div class="total-price">
+                    <h2>Общая сумма: {{ total }}₸</h2>
+                </div>
+                <a href="/checkout" class="checkout-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    Оформить заказ
+                </a>
+            </div>
+        {% else %}
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Корзина пуста</h2>
+                <p>Добавьте товары для покупки</p>
+                <a href="/" class="continue-shopping">Перейти к покупкам</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
