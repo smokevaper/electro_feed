@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать товар - Electro Feed</title>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><a href="/" style="color: inherit; text-decoration: none;">ELECTRO FEED</a></h1>
+                <p>Редактировать товар</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('admin_panel') }}" class="nav-link">← Назад к панели</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <div class="form-container">
+                <h2>Редактировать товар</h2>
+                
+                <form method="POST" class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Название товара</label>
+                            <input type="text" id="name" name="name" value="{{ product.name }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Категория</label>
+                            <select id="category" name="category" required>
+                                <option value="pod-systems" {% if product.category == 'pod-systems' %}selected{% endif %}>Под системы</option>
+                                <option value="coils" {% if product.category == 'coils' %}selected{% endif %}>Испарители/Картриджи</option>
+                                <option value="batteries" {% if product.category == 'batteries' %}selected{% endif %}>Аккумуляторы</option>
+                                <option value="tanks" {% if product.category == 'tanks' %}selected{% endif %}>Баки/RTA</option>
+                                <option value="electronics" {% if product.category == 'electronics' %}selected{% endif %}>Электро товары</option>
+                                <option value="hookah" {% if product.category == 'hookah' %}selected{% endif %}>Кальяны</option>
+                                <option value="plates" {% if product.category == 'plates' %}selected{% endif %}>Плитки</option>
+                                <option value="accessories" {% if product.category == 'accessories' %}selected{% endif %}>Комплектующие</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="price_tenge">Цена в тенге (₸)</label>
+                            <input type="number" id="price_tenge" name="price_tenge" step="0.01" value="{{ product.price_tenge }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price_rub">Цена в рублях (₽)</label>
+                            <input type="number" id="price_rub" name="price_rub" step="0.01" value="{{ product.price_rub }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Краткое описание</label>
+                        <input type="text" id="description" name="description" value="{{ product.description }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specs">Подробные характеристики</label>
+                        <textarea id="specs" name="specs" rows="4">{{ product.specs }}</textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <a href="{{ url_for('admin_panel') }}" class="cancel-btn">Отмена</a>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> Сохранить изменения
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(139, 92, 246, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        .form-container h2 {
+            color: #8b5cf6;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #8b5cf6;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .submit-btn, .cancel-btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cancel-btn {
+            background: transparent;
+            color: #ccc;
+            border: 1px solid #ccc;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
