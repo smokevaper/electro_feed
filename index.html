@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electro Feed - Вейп Оптовик</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>ELECTRO FEED</h1>
+                <p>Вейп Оптовик</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#products" class="nav-link">Товары</a></li>
+                    <li><a href="#certificates" class="nav-link">Сертификаты</a></li>
+                    <li><a href="#contact" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                    <a href="/login" class="login-link">Войти</a>
+                    <a href="/register" class="register-link">Регистрация</a>
+                    <div class="telegram-link">
+                        <a href="https://t.me/vape_feed_original" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                            Telegram
+                        </a>
+                    </div>
+                </div>
+</div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <h2>Добро пожаловать в ELECTRO FEED</h2>
+                <p>Ваш надежный партнер в мире вейпинга</p>
+                <p class="hero-description">
+                    Оптовые поставки качественных вейп товаров по лучшим ценам. 
+                    Большой ассортимент, быстрая доставка, индивидуальный подход к каждому клиенту.
+                </p>
+                <a href="/register" class="cta-button">
+                    <i class="fas fa-user-plus"></i>
+                    Зарегистрироваться
+                </a>
+
+                <div class="price-notice">
+                    ⚠️ ВНИМАНИЕ: Точные цены указаны в тенге (₸). Для получения точной стоимости в рублях конвертируйте на момент заказа или свяжитесь с менеджером!
+                </div>
+
+                <div class="delivery-info">
+                    <h3><i class="fas fa-shipping-fast"></i> Информация о доставке</h3>
+                    <p>Доставка осуществляется от 10 до 30 дней в зависимости от страны и региона через СДЭК</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="certificates">
+            <div class="container">
+                <h2>Наши сертификаты и лицензии</h2>
+                <div class="certificates-grid">
+                    <div class="certificate">
+                        <i class="fas fa-certificate"></i>
+                        <h3>ISO 9001:2015</h3>
+                        <p>Сертификат качества</p>
+                    </div>
+                    <div class="certificate">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>CE Marking</h3>
+                        <p>Европейский стандарт</p>
+                    </div>
+                    <div class="certificate">
+                        <i class="fas fa-award"></i>
+                        <h3>RoHS</h3>
+                        <p>Экологическая безопасность</p>
+                    </div>
+                    <div class="certificate">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>FCC ID</h3>
+                        <p>Сертификат безопасности</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products-section">
+            <div class="container">
+                <h2>Каталог товаров</h2>
+                
+
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">Все товары</button>
+                    <button class="filter-btn" data-category="pod-systems">Под системы</button>
+                    <button class="filter-btn" data-category="coils">Испарители</button>
+                    <button class="filter-btn" data-category="batteries">Аккумуляторы</button>
+                    <button class="filter-btn" data-category="tanks">Баки</button>
+                    <button class="filter-btn" data-category="electronics">Электро товары</button>
+                    <button class="filter-btn" data-category="hookah">Кальяны</button>
+                    <button class="filter-btn" data-category="plates">Плитки</button>
+                </div>
+
+                <div class="products-grid" id="products-grid">
+                    <!-- Картриджи -->
+                    <div class="product-card" data-category="coils">
+                        <div class="product-image">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3>Картриджи XROS 0.6Ω-1.2Ω</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Сопротивление: 0.6Ω, 0.8Ω, 1.0Ω, 1.2Ω</p>
+                            <p><small>Совместимость: Vaporesso XROS серия, Объем: 2ml, Материал: PCTG</small></p>
+                        </div>
+                        <p class="price">2500₸ / 470₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <div class="product-card" data-category="coils">
+                        <div class="product-image">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3>Картриджи Xlim 0.4Ω-1.0Ω</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Сопротивление: 0.4Ω, 0.6Ω, 0.8Ω, 1.0Ω</p>
+                            <p><small>Совместимость: OXva Xlim серия, Объем: 2ml, Материал: PCTG</small></p>
+                        </div>
+                        <p class="price">2500₸ / 470₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <!-- Под системы -->
+                    <div class="product-card" data-category="pod-systems">
+                        <div class="product-image">
+                            <i class="fas fa-smoking"></i>
+                        </div>
+                        <h3>Voopoo Drag 2</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Мощность: до 177W</p>
+                            <p><small>Размер: 90×54×25mm, АКБ: 2х18650 (не входят), Зарядка: USB Type-C, Чип: GENE.FIT</small></p>
+                        </div>
+                        <p class="price">25000₸ / 5000₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <div class="product-card" data-category="pod-systems">
+                        <div class="product-image">
+                            <i class="fas fa-smoking"></i>
+                        </div>
+                        <h3>GeekVape Aegis Legend 2</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Мощность: до 200W</p>
+                            <p><small>Размер: 90×54×27mm, АКБ: 2х18650, Защита: IP68, Чип: AS-200</small></p>
+                        </div>
+                        <p class="price">25000₸ / 5000₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <!-- Аккумуляторы -->
+                    <div class="product-card" data-category="batteries">
+                        <div class="product-image">
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                        <h3>YLAID 18650 40A</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Емкость: 2200 mAh</p>
+                            <p><small>Ток разряда: 40A, Размер: 18650, Тип: Li-ion</small></p>
+                        </div>
+                        <p class="price">1190₸ / 230₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <div class="product-card" data-category="batteries">
+                        <div class="product-image">
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                        <h3>Sony VTC5A</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Емкость: 2600 mAh (оригинал)</p>
+                            <p><small>Ток разряда: 35A, Размер: 18650, Производитель: Sony</small></p>
+                        </div>
+                        <p class="price">2190₸ / 420₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <!-- Баки -->
+                    <div class="product-card" data-category="tanks">
+                        <div class="product-image">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Zeus Z RTA</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Объем: 5.5ml</p>
+                            <p><small>Диаметр: 26mm, Материал: нержавеющая сталь, Обдув: Side airflow</small></p>
+                        </div>
+                        <p class="price">9500₸ / 1900₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <!-- Кальяны -->
+                    <div class="product-card" data-category="hookah">
+                        <div class="product-image">
+                            <i class="fas fa-wine-glass"></i>
+                        </div>
+                        <h3>Кальян 50 см / 2 трубки</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Полный комплект</p>
+                            <p><small>Высота: 50 см, 2 трубки, табак, уголь, мундштуки в комплекте</small></p>
+                        </div>
+                        <p class="price">21900₸ / 4190₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+
+                    <!-- Плитки -->
+                    <div class="product-card" data-category="plates">
+                        <div class="product-image">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Электроплитка для углей</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>Мощность: 1000W</p>
+                            <p><small>Диаметр: 155 мм, Регулировка температуры, Время нагрева: 3-5 минут</small></p>
+                        </div>
+                        <p class="price">7500₸ / 1450₽</p>
+                        <p class="login-required">Войдите для покупки</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Контакты</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <div>
+                            <h3>Telegram канал</h3>
+                            <a href="https://t.me/vape_feed_original" target="_blank">@vape_feed_original</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-handshake"></i>
+                        <div>
+                            <h3>Оптовые продажи</h3>
+                            <p>Индивидуальные условия для каждого клиента</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <div>
+                            <h3>Доставка СДЭК 10-30 дней</h3>
+                            <p>В зависимости от страны и региона</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ELECTRO FEED. Все права защищены.</p>
+            <p>Оптовые поставки вейп товаров</p>
+        </div>
+    </footer>
+
+    <script>
+        // Category filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const allProducts = document.querySelectorAll('.product-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const category = this.getAttribute('data-category');
+
+                    allProducts.forEach(product => {
+                        const productCategory = product.getAttribute('data-category');
+                        if (category === 'all' || productCategory === category) {
+                            product.style.display = 'block';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
