@@ -5,4 +5,51 @@
 	created_at DATETIME, 
 	PRIMARY KEY (id), 
 	UNIQUE (name)
-)/	C
+indexsqlite_autoindex_category_1cateSQLite format 3gory ?tableorder_itemorder_item CREATE TABLE order_item (
+id INTEGER NOT NULL, 
+	order_id INTEGER NOT NULL, 
+	product_id INTEGER NOT NULL, 
+	quantity INTEGER NOT NULL, 
+	price FLOAT NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(order_id) REFERENCES "order" (id), 
+	FOREIGN KEY(product_id) REFERENCES product (id)
+)� �!tableorderorder CREATE TABLE "order" (
+id INTEGER NOT NULL, 
+	user_id INTEGER NOT NULL, 
+	total_price FLOAT NOT NULL, 
+	country VARCHAR(100) NOT NULL, 
+	city VARCHAR(100) NOT NULL, 
+	address VARCHAR(200) NOT NULL, 
+	phone VARCHAR(20), 
+	status VARCHAR(50), 
+	created_at DATETIME, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(user_id) REFERENCES user (id)
+)� tablecart_itemcart_item CREATE TABLE cart_item (
+	id INTEGER NOT NULL, 
+	user_id INTEGER NOT NULL, 
+	product_id INTEGER NOT NULL, 
+	quantity INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(user_id) REFERENCES user (id), 
+	FOREIGN KEY(product_id) REFERENCES product (id)
+)�x �Gtableproductproduct CREATE TABLE product (
+	id INTEGER NOT NULL, 
+	name VARCHAR(200) NOT NULL, 
+	price_tenge FLOAT NOT NULL, 
+	price_rub FLOAT NOT NULL, 
+	category VARCHAR(100) NOT NULL, 
+	description TEXT, 
+	specs TEXT, 
+	PRIMARY KEY (id) 
+)�u �Mtableuseruser CREATE TABLE user (
+	id INTEGER NOT NULL, 
+	username VARCHAR(80) NOT NULL, 
+	email VARCHAR(120) NOT NULL, 
+	password_hash VARCHAR(120) NOT NULL, 
+	is_admin BOOLEAN, 
+	PRIMARY KEY (id), 
+	UNIQUE (username), 
+	UNIQUE (email) 
+)' ; indexsqlite_autoindex_user_2user ' n 9 n
