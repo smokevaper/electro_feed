@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказы - Electro Feed</title>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><a href="/" style="color: inherit; text-decoration: none;">ELECTRO FEED</a></h1>
+                <p>Управление заказами</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('admin_panel') }}" class="nav-link">Товары</a></li>
+                    <li><a href="{{ url_for('admin_orders') }}" class="nav-link active">Заказы</a></li>
+                    <li><a href="/" class="nav-link">На сайт</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="nav-link">Выйти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <h2>Все заказы</h2>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="orders-grid">
+                {% for order in orders %}
+                <div class="order-card">
+                    <div class="order-header">
+                        <h3>Заказ #{{ order.id }}</h3>
+                        <span class="order-status status-{{ order.status.replace(' ', '-') }}">
+                            {{ order.status }}
+                        </span>
+                    </div>
+                    
+                    <div class="order-info">
+                        <p><strong>Клиент:</strong> {{ order.user.username }}</p>
+                        <p><strong>Email:</strong> {{ order.user.email }}</p>
+                        <p><strong>Телефон:</strong> {{ order.phone }}</p>
+                        <p><strong>Адрес:</strong> {{ order.country }}, {{ order.city }}, {{ order.address }}</p>
+                        <p><strong>Сумма:</strong> {{ order.total_price }}₸</p>
+                        <p><strong>Дата:</strong> {{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+                    </div>
+                    
+                    <div class="order-items">
+                        <h4>Товары:</h4>
+                        {% for item in order.items %}
+                        <div class="order-item">
+                            {{ item.product.name }} x{{ item.quantity }} = {{ item.price * item.quantity }}₸
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}" class="status-form">
+                        <select name="status" onchange="this.form.submit()">
+                            <option value="новый" {% if order.status == 'новый' %}selected{% endif %}>Новый</option>
+                            <option value="обработка" {% if order.status == 'обработка' %}selected{% endif %}>В обработке</option>
+                            <option value="отправлен" {% if order.status == 'отправлен' %}selected{% endif %}>Отправлен</option>
+                            <option value="доставлен" {% if order.status == 'доставлен' %}selected{% endif %}>Доставлен</option>
+                            <option value="отменен" {% if order.status == 'отменен' %}selected{% endif %}>Отменен</option>
+                        </select>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .order-card {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .order-header h3 {
+            color: #8b5cf6;
+            margin: 0;
+        }
+        
+        .order-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-новый { background: #3b82f6; color: white; }
+        .status-обработка { background: #f59e0b; color: white; }
+        .status-отправлен { background: #8b5cf6; color: white; }
+        .status-доставлен { background: #10b981; color: white; }
+        .status-отменен { background: #ef4444; color: white; }
+        
+        .order-info p {
+            color: #ccc;
+            margin: 0.5rem 0;
+        }
+        
+        .order-items {
+            margin: 1rem 0;
+        }
+        
+        .order-items h4 {
+            color: #8b5cf6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .order-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin: 0.3rem 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .status-form select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .orders-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
