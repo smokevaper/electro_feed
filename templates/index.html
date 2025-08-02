@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electro Feed - Вейп Оптовик</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>ELECTRO FEED</h1>
+                <p>Вейп Оптовик</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#products" class="nav-link">Товары</a></li>
+                    <li><a href="#certificates" class="nav-link">Сертификаты</a></li>
+                    <li><a href="#contact" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                {% if current_user.is_authenticated %}
+                    <span style="color: #8b5cf6;">Привет, {{ current_user.username }}!</span>
+                    {% if current_user.is_admin %}
+                        <a href="{{ url_for('admin_panel') }}" class="admin-link">
+                            <i class="fas fa-cog"></i> Админ панель
+                        </a>
+                    {% endif %}
+                    <a href="{{ url_for('cart') }}" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        Корзина {% if cart_count > 0 %}({{ cart_count }}){% endif %}
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="logout-link">Выйти</a>
+                {% else %}
+                    <a href="/login" class="login-link">Войти</a>
+                    <a href="/register" class="register-link">Регистрация</a>
+                {% endif %}
+                <div class="telegram-link">
+                    <a href="https://t.me/vape_feed_original" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                        Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <h2>Добро пожаловать в ELECTRO FEED</h2>
+                <p>Ваш надежный партнер в мире вейпинга</p>
+                <p class="hero-description">
+                    Оптовые поставки качественных вейп товаров по лучшим ценам. 
+                    Большой ассортимент, быстрая доставка, индивидуальный подход к каждому клиенту.
+                </p>
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('register') }}" class="cta-button">
+                    <i class="fas fa-user-plus"></i>
+                    Зарегистрироваться
+                </a>
+                {% endif %}
+
+                <div class="price-notice">
+                    ⚠️ ВНИМАНИЕ: Точные цены указаны в тенге (₸). Для получения точной стоимости в рублях конвертируйте на момент заказа или свяжитесь с менеджером!
+                </div>
+
+                <div class="delivery-info">
+                    <h3><i class="fas fa-shipping-fast"></i> Информация о доставке</h3>
+                    <p>Доставка осуществляется от 10 до 30 дней в зависимости от страны и региона через СДЭК</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="certificates">
+            <div class="container">
+                <h2>Наши сертификаты и лицензии</h2>
+                <div class="certificates-grid">
+                    <div class="certificate">
+                        <i class="fas fa-certificate"></i>
+                        <h3>ISO 9001:2015</h3>
+                        <p>Сертификат качества</p>
+                    </div>
+                    <div class="certificate">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>CE Marking</h3>
+                        <p>Европейский стандарт</p>
+                    </div>
+                    <div class="certificate">
+                        <i class="fas fa-award"></i>
+                        <h3>RoHS</h3>
+                        <p>Экологическая безопасность</p>
+                    </div>
+                    <div class="certificate">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>FCC ID</h3>
+                        <p>Сертификат безопасности</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products-section">
+            <div class="container">
+                <h2>Каталог товаров</h2>
+
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">Все товары</button>
+                    {% for category in categories %}
+                    <button class="filter-btn" data-category="{{ category.name }}">{{ category.display_name }}</button>
+                    {% endfor %}
+                </div>
+
+                <div class="products-grid" id="products-grid">
+                    {% for product in products %}
+                    <div class="product-card" data-category="{{ product.category }}">
+                        <div class="product-image">
+                            {% if product.category == 'coils' %}
+                                <i class="fas fa-vial"></i>
+                            {% elif product.category == 'pod-systems' %}
+                                <i class="fas fa-smoking"></i>
+                            {% elif product.category == 'batteries' %}
+                                <i class="fas fa-battery-full"></i>
+                            {% elif product.category == 'tanks' %}
+                                <i class="fas fa-flask"></i>
+                            {% elif product.category == 'accessories' %}
+                                <i class="fas fa-tools"></i>
+                            {% elif product.category == 'hookah' %}
+                                <i class="fas fa-wine-glass"></i>
+                            {% elif product.category == 'plates' %}
+                                <i class="fas fa-fire"></i>
+                            {% else %}
+                                <i class="fas fa-cube"></i>
+                            {% endif %}
+                        </div>
+                        <h3>{{ product.name }}</h3>
+                        <div class="product-specs">
+                            <h4>Характеристики:</h4>
+                            <p>{{ product.description }}</p>
+                            <p><small>{{ product.specs }}</small></p>
+                        </div>
+                        <p class="price">{{ product.price_tenge }}₸ / {{ product.price_rub }}₽</p>
+                        {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="add-to-cart-btn">
+                                <i class="fas fa-cart-plus"></i>
+                                Добавить в корзину
+                            </a>
+                        {% else %}
+                            <p class="login-required">Войдите для покупки</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Контакты</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <div>
+                            <h3>Telegram канал</h3>
+                            <a href="https://t.me/vape_feed_original" target="_blank">@vape_feed_original</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-handshake"></i>
+                        <div>
+                            <h3>Оптовые продажи</h3>
+                            <p>Индивидуальные условия для каждого клиента</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <div>
+                            <h3>Доставка СДЭК 10-30 дней</h3>
+                            <p>В зависимости от страны и региона</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ELECTRO FEED. Все права защищены.</p>
+            <p>Оптовые поставки вейп товаров</p>
+        </div>
+    </footer>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div id="flash-messages" style="position: fixed; top: 100px; right: 20px; z-index: 9999;">
+            {% for message in messages %}
+            <div class="alert" style="background: #28a745; color: white; padding: 1rem; margin-bottom: 0.5rem; border-radius: 5px; max-width: 300px;">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(function() {
+                document.getElementById('flash-messages').style.display = 'none';
+            }, 3000);
+        </script>
+        {% endif %}
+    {% endwith %}
+
+    <script>
+        // Category filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const allProducts = document.querySelectorAll('.product-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const category = this.getAttribute('data-category');
+
+                    allProducts.forEach(product => {
+                        const productCategory = product.getAttribute('data-category');
+                        if (category === 'all' || productCategory === category) {
+                            product.style.display = 'block';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
+
+```
+The category filters section is updated to dynamically render categories from the backend.
